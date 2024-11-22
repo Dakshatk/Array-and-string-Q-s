@@ -1,14 +1,20 @@
 #include<iostream>
 using namespace std;
 int main(){
-    int a[5]={32,45,23,35,41};
-    for(int i=0;i<5;i++){
+    int a[5]={10,20,65,50,70};
+    int i,maxi=a[0];
+   
+    for(i=1;i<5;i++){
+        if(a[i]<a[i+1]){
+            maxi=a[i+1];
+        }
+        else{
         
-        cout<<a[i]<<" ";
+            maxi=max(maxi,a[i]);
+        }
     }
+        cout<<endl;
+        cout<<maxi<<" is largest number";
 
-    if(a[0]>a[i]){
-        cout<<a[0]<<"Largest num";
+        return 0;
     }
-    else if(a[i])
-}

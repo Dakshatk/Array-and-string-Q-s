@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    int a[5] = {10, 2, 5, 6, 3};
+    int a[5] = {1, 2, 9, 6, 8};
     int largest = a[0];
     int i;
     int sl = -1;

@@ -2,7 +2,7 @@
 using namespace std;
 int main(){
     int a[]={0,1,1,1,1,1,0,1,0,1,1,1,1};
-    int i,j,n = sizeof(a)/sizeof(int);
+    int i,n = sizeof(a)/sizeof(int);
     int count = 0;
     int largest=0;
         

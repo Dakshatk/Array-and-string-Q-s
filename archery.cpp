@@ -1,47 +1,49 @@
 #include<iostream>
 #include<algorithm>
 using namespace std;
-
-void findTopscores(int scores[],int size,int top[]){
-    int count = 0;
-    top[0]=scores[0];
-    count = 1;
-    for(int i = 0;i<size-1;i++){
-        if(scores[i]!=scores[i+1]){
-            top[count] = scores[i];
-            count++;
-        }   
+void findTopscores(int scores[], int size, int top[], int &topCount) {
+    topCount = 0;
+    top[topCount++] = scores[0];
+    for (int i = 1; i < size && topCount < 5; i++) {
+        if (scores[i] != scores[i - 1]) {
+            top[topCount++] = scores[i];
+        }
     }
 }
-//22 33 44 55 66 99 99 78 56 110 113 119
-int main(){
+int main() {
     int scores[12];
     int size = 12;
-    int top[5];
-    cout<<"Enter the scores from 20 to 120"<<endl;
-    for(int i = 0;i<size-1;i++){
-        cin>>scores[i];
-        if(scores[i]==scores[i+1]){
-            scores[i]=0;
+    int top[5], topCount;
+    cout << "Enter the scores from 20 to 120" << endl;
+    for (int i = 0; i < size; i++) {
+        cin >> scores[i];
+    }
+    sort(scores, scores + size, greater<int>());
+    cout << "\nSorted scores:\n";
+    for (int i = 0; i < size; i++) {
+        cout << scores[i] << " ";
+    }
+    cout << endl;
+    findTopscores(scores, size, top, topCount);
+    bool tie = false;
+    cout << "\nThese players have rank 1 (tie):\n";
+    for (int i = 0; i < topCount; i++) {
+        if (top[i] == top[0]) {
+            cout << top[i] << " ";
+            tie = true;
+        } 
+        else {
+            break;
         }
     }
-    sort(scores,scores+size,greater<int>());
-    for(int i=0;i<size-1;i++){
-        cout<<scores[i]<<" ";
-    }
-    cout<<endl;
-    findTopscores(scores,size,top);
-    if (top[0] == top[1] || top[1] == top[2] || top[2] == top[3] || top[3] == top[4]) {
-        cout << "These players have rank 1 (tie):" << endl;
-        for (int i = 0; i < 4; i++) {
-            if (top[i] == top[i + 1]) {
-                cout << top[i] << " ";
-            }
-        }
+    if (!tie) {
+        cout << "No tie for rank 1.\n";
+    } else {
         cout << endl;
     }
-    for(int i=0;i<5;i++){
-        cout<<top[i]<<" ";
+    cout << "\nTop " << topCount << " unique scores with ranks:\n";
+    for (int i = 0; i < topCount; i++) {
+        cout << "Rank " << (i + 1) << ": " << top[i] << endl;
     }
     return 0;
 }
